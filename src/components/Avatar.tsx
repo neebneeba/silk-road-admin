@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "../store";
+import { RootState } from "@/store";
 
 const Avatar: FC = () => {
   const { username, profile_picture } = useSelector(
