@@ -8,10 +8,10 @@ import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 
 // Page
-import Login from "../pages/Login";
+import Login from "@/pages/Login";
 
 // Slice
-import { setUser } from "../slices/user.slice";
+import { setUser } from "@/slices/user.slice";
 
 const Layout: FC<{ children: ReactNode }> = ({ children }) => {
   const accessToken = Cookies.get("access_token");
@@ -46,11 +46,11 @@ const Layout: FC<{ children: ReactNode }> = ({ children }) => {
   );
 
   return (
-    <div className="flex flex-col h-screen relative">
-      <div className="flex p-2 space-x-2 flex-grow bg-yellow-500 absolute h-screen w-full">
+    <div className="flex flex-col h-screen relative bg-gray-100">
+      <div className="flex p-2 space-x-2 flex-grow absolute h-screen w-full">
         <Sidebar />
-        <div className="flex-grow bg-red-500 mt-12 overflow-auto">
-          {children}
+        <div className="flex-grow mt-12 rounded-lg shadow border bg-white">
+          <div className="h-full overflow-hidden">{children}</div>
         </div>
       </div>
       <Navbar />
