@@ -1,7 +1,7 @@
 import { FC, FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AxiosError } from "axios";
-import axiosInstance from "../utils/api";
+import axiosInstance from "@/utils/api";
 import { toast, TypeOptions } from "react-toastify";
 import Cookies from "js-cookie";
 

@@ -1,7 +1,7 @@
 import { FC } from "react";
 
 // Layout
-import Layout from "../layout";
+import Layout from "@/layout";
 
 const Product: FC = () => {
   return (
