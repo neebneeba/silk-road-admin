@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 
 // Components
-import Avatar from "../components/Avatar";
+import Avatar from "@/components/Avatar";
 
 const Navbar: FC = () => {
   const navigate = useNavigate();
