@@ -1,5 +1,10 @@
-import { FC, ReactElement, useId, useState } from "react";
+import { FC, ReactElement, useId } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { RootState } from "@/store";
+
+// Slice
+import { setConfig } from "@/slices/config.slice";
 
 const menus: Array<{
   name: string;
@@ -74,12 +79,21 @@ const menus: Array<{
 ];
 
 const Sidebar: FC = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const { sidebarIsOpen } = useSelector((state: RootState) => state.config);
+  const dispath = useDispatch();
+
+  function toggleSidebar(isOpen: boolean) {
+    dispath(
+      setConfig({
+        sidebarIsOpen: !isOpen,
+      })
+    );
+  }
 
   return (
     <div
       className={`mt-12 p-2 bg-zinc-800 rounded-lg flex flex-col space-y-10 ${
-        isOpen ? "w-64" : ""
+        sidebarIsOpen ? "w-64" : ""
       }`}
     >
       {/* App icon */}
@@ -94,11 +108,11 @@ const Sidebar: FC = () => {
             key={useId()}
             to={item.path}
             className={`h-12 flex rounded text-xs font-semibold hover:bg-gray-600 transition-colors ${
-              isOpen ? "space-x-1 px-2" : "w-12"
+              sidebarIsOpen ? "space-x-1 px-2" : "w-12"
             }`}
           >
             {item.icon}
-            {isOpen && (
+            {sidebarIsOpen && (
               <h3 className="my-auto flex-grow text-start">{item.name}</h3>
             )}
           </Link>
@@ -108,10 +122,10 @@ const Sidebar: FC = () => {
       {/* Close and open button */}
       <button
         type="button"
-        onClick={() => setIsOpen((value) => !value)}
+        onClick={() => toggleSidebar(sidebarIsOpen)}
         className="h-12 w-12 flex hover:bg-gray-600 rounded transition-colors text-gray-300 ml-auto"
       >
-        {isOpen ? (
+        {sidebarIsOpen ? (
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
