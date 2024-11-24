@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import { Stack, Table, HStack, Heading } from "@chakra-ui/react";
+import { Stack, Table, HStack } from "@chakra-ui/react";
 import {
   PaginationItems,
   PaginationNextTrigger,
@@ -13,6 +13,7 @@ import axiosInstance from "@/utils/api";
 
 // Layout
 import Layout from "@/layout";
+import InsertCategoryDialog from "@/components/InsertCategoryDialog";
 
 interface Category {
   id: number;
@@ -53,19 +54,19 @@ const Category: FC = () => {
   }, [page]);
 
   return (
-    <Layout>
-      <Stack height={"100%"}>
-        <Heading margin={5}>Ангилал</Heading>
+    <Layout title="Ангилал">
+      <Stack>
+        <InsertCategoryDialog />
 
         <Table.ScrollArea>
           <Table.Root showColumnBorder stickyHeader striped>
-            <Table.Header backgroundColor={"red"}>
+            <Table.Header bgColor={"red"}>
               <Table.Row>
                 <Table.ColumnHeader>№</Table.ColumnHeader>
                 <Table.ColumnHeader>Нэр</Table.ColumnHeader>
                 <Table.ColumnHeader>Дүрс</Table.ColumnHeader>
                 <Table.ColumnHeader>Тайлбар</Table.ColumnHeader>
-                <Table.ColumnHeader textAlign="end">Үйлдэл</Table.ColumnHeader>
+                <Table.ColumnHeader></Table.ColumnHeader>
               </Table.Row>
             </Table.Header>
             <Table.Body>
@@ -75,8 +76,15 @@ const Category: FC = () => {
                   <Table.Cell>{item.name}</Table.Cell>
                   <Table.Cell>{item.icon}</Table.Cell>
                   <Table.Cell>{item.description}</Table.Cell>
-                  <Table.Cell>
-                    <Button variant="surface" paddingX={5} colorPalette="green">
+                  <Table.Cell textAlign="end">
+                    <Button
+                      variant="surface"
+                      paddingX={5}
+                      borderColor="green.300"
+                      _hover={{
+                        bgColor: "green.300",
+                      }}
+                    >
                       Засах
                     </Button>
                   </Table.Cell>
