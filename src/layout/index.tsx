@@ -1,11 +1,13 @@
 import { FC, ReactNode } from "react";
 import { useDispatch } from "react-redux";
+import { Flex, Heading, HStack, Stack } from "@chakra-ui/react";
 import { jwtDecode } from "jwt-decode";
 import Cookies from "js-cookie";
 
 // Components
-import Navbar from "./Navbar";
+import Header from "./Header";
 import Sidebar from "./Sidebar";
+import Footer from "./Footer";
 
 // Page
 import Login from "@/pages/Login";
@@ -13,7 +15,10 @@ import Login from "@/pages/Login";
 // Slice
 import { setUser } from "@/slices/user.slice";
 
-const Layout: FC<{ children: ReactNode }> = ({ children }) => {
+const Layout: FC<{ children: ReactNode; title: string }> = ({
+  children,
+  title,
+}) => {
   const accessToken = Cookies.get("access_token");
 
   if (!accessToken) {
@@ -46,15 +51,19 @@ const Layout: FC<{ children: ReactNode }> = ({ children }) => {
   );
 
   return (
-    <div className="flex flex-col h-screen relative bg-gray-100">
-      <div className="flex p-2 space-x-2 flex-grow absolute h-screen w-full">
-        <Sidebar />
-        <div className="flex-grow mt-12 rounded-lg shadow border bg-white">
-          <div className="h-full overflow-hidden">{children}</div>
-        </div>
-      </div>
-      <Navbar />
-    </div>
+    <Flex gapX={0} bgColor="gray.100" gap={0}>
+      <Sidebar />
+      <Stack justifyContent={"start"} gap={0} height={"100%"} width={"100%"}>
+        <Header />
+        <Stack width="100%" bgColor="white" padding={5} gap={5}>
+          <HStack justifyContent="space-between">
+            <Heading marginY="auto">{title}</Heading>
+          </HStack>
+          {children}
+        </Stack>
+        <Footer />
+      </Stack>
+    </Flex>
   );
 };
 
