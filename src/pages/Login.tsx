@@ -5,6 +5,11 @@ import axiosInstance from "@/utils/api";
 import { toast, TypeOptions } from "react-toastify";
 import Cookies from "js-cookie";
 
+// Components
+import { Center, Input, Stack } from "@chakra-ui/react";
+import { Button } from "@/components/ui/button";
+import { IoLogInOutline } from "react-icons/io5";
+
 const Login: FC = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -52,30 +57,48 @@ const Login: FC = () => {
   }
 
   return (
-    <div className="h-screen flex bg-gradient-to-tr from-indigo-900 to-slate-600">
-      <form
+    <Center height={"vh"} bgColor={"white"}>
+      <Stack
+        as={"form"}
+        justifyContent={"space-between"}
+        padding={10}
+        rounded={"sm"}
+        gap={10}
+        color={"gray.900"}
+        width={"100%"}
+        maxWidth={500}
         onSubmit={(e) => submitLogin(e)}
-        className="px-20 py-40 m-auto flex flex-col space-y-5 bg-white"
       >
-        <input
-          type="text"
-          placeholder="Нэвтрэх нэр"
-          className="border px-2 py-2 rounded border-gray-600"
+        <Input
           value={username}
           onChange={(e) => setUsername(e.target.value)}
+          placeholder="Нэвтрэх нэр"
+          variant={"flushed"}
+          paddingX={2}
         />
-        <input
+        <Input
           type="password"
-          placeholder="Нууц үг"
-          className="border px-2 py-2 rounded border-gray-600"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          placeholder="Нууц үг"
+          variant={"flushed"}
+          paddingX={2}
         />
-        <button type="submit" className="bg-blue-500 p-2 text-white rounded">
+        <Button
+          mt={10}
+          type="submit"
+          border={"none"}
+          bgGradient={"to-br"}
+          gradientFrom={"pink.300"}
+          gradientTo={"purple.500"}
+          color={"white"}
+          height={12}
+        >
+          <IoLogInOutline />
           Нэвтрэх
-        </button>
-      </form>
-    </div>
+        </Button>
+      </Stack>
+    </Center>
   );
 };
 

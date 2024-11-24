@@ -2,6 +2,10 @@ import { FC } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store";
 
+// Components
+import { Image, Text, Center, Box } from "@chakra-ui/react";
+import { LuUser } from "react-icons/lu";
+
 const Avatar: FC = () => {
   const { username, profile_picture } = useSelector(
     (state: RootState) => state.user
@@ -9,23 +13,24 @@ const Avatar: FC = () => {
 
   return (
     <div className="flex space-x-2 my-auto">
-      {profile_picture ? (
-        <img src={profile_picture} alt="" className="h-10 w-10 rounded-full" />
-      ) : (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="currentColor"
-          className="h-10 w-10 text-gray-200"
+      <Center direction={"row"} gap={2}>
+        <Box
+          borderColor={"gray.300"}
+          borderRadius={"full"}
+          borderWidth={1}
+          height={"32px"}
+          width={"32px"}
         >
-          <path
-            fillRule="evenodd"
-            d="M18.685 19.097A9.723 9.723 0 0 0 21.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 0 0 3.065 7.097A9.716 9.716 0 0 0 12 21.75a9.716 9.716 0 0 0 6.685-2.653Zm-12.54-1.285A7.486 7.486 0 0 1 12 15a7.486 7.486 0 0 1 5.855 2.812A8.224 8.224 0 0 1 12 20.25a8.224 8.224 0 0 1-5.855-2.438ZM15.75 9a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"
-            clipRule="evenodd"
-          />
-        </svg>
-      )}
-      <h3 className="my-auto text-white">{username}</h3>
+          {profile_picture ? (
+            <Image src={profile_picture} />
+          ) : (
+            <Center height={"100%"} width={"100%"}>
+              <LuUser size={24} color="white" />
+            </Center>
+          )}
+        </Box>
+        <Text color={"white"}>{username}</Text>
+      </Center>
     </div>
   );
 };
