@@ -3,10 +3,9 @@ import { createRoot } from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { Provider } from "react-redux";
-import { ChakraProvider, defaultSystem } from "@chakra-ui/react";
+import { Provider as ChakraProvider } from "@/components/ui/provider";
 
 // CSS
-import "./index.css";
 import "react-toastify/dist/ReactToastify.css";
 
 // Store
@@ -18,7 +17,7 @@ import router from "./router";
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <Provider store={store}>
-      <ChakraProvider value={defaultSystem}>
+      <ChakraProvider>
         <ToastContainer />
         <RouterProvider router={router} />
       </ChakraProvider>
